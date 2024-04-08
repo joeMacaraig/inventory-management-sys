@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -12,15 +13,11 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // routes
-//app.use(route)
+//app.use(userRoutes)
 
 // database connection
 mongoose
-  .connect(DBURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
+  .connect(DBURI)
   .then((res) =>
     app.listen(PORT, () => console.log(`Listening on port: ${PORT}.`))
   )
