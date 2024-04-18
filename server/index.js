@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import { userRouter } from "./routes/user.routes.js";
 
 dotenv.config();
 
@@ -13,11 +14,12 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // routes
-//app.use(userRoutes)
+app.use(userRouter);
 
 // database connection
 mongoose
-  .connect(DBURI)
+.set("strictQuery", false)
+  .connect(DBURI, { dbName: "InventoryManagement" })
   .then((res) =>
     app.listen(PORT, () => console.log(`Listening on port: ${PORT}.`))
   )
